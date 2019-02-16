@@ -6,7 +6,7 @@ var session = require('express-session');
 
 var app = express();
 
-app.use(session({secret: 'codingdojorocks'}));  // string for encryption
+app.use(session({secret: 'socketsrock'}));  // string for encryption
 
 app.use(express.static(__dirname + "/static"));
 
@@ -28,7 +28,7 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
   console.log("Client/socket is connected!");
   console.log("Client/socket id is: ", socket.id);
- 
+
 socket.on( "push_button_clicked", function (data){
     cnt++;
     console.log( 'push button clicked!');
