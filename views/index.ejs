@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>Form</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+         $(document). ready(function (){
+            var socket  = io.connect();
+
+            $( '#push').click(function (){
+                socket.emit( "push_button_clicked");
+            });
+            socket.on( 'push_button_server_response', function (data){
+                $('#cnt').text(data.response)
+                console.log( 'from server: '  + data.response);
+            });
+
+            $( '#reset').click(function (){
+                socket.emit( "reset_button_clicked");
+            });
+            socket.on( 'reset_button_server_response', function (data){
+                $('#cnt').text(data.response)
+                console.log( 'from server: '  + data.response);
+            });
+
+        })
+    </script>
+</head>
+<body>
+    <meta charset+"utf-8">
+    <title>Counter</title>
+    <h3>The button has been pushed <span id="cnt">  </span> time(s).</h3>
+    <p> Push the button to update the count!</p>
+
+    <button id="push">Push the epic button</button>
+    <button id="reset">Reset</button>
+
+</body>
+</html>
